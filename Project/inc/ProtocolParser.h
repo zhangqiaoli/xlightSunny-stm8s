@@ -19,6 +19,8 @@ void Msg_DevCCT(uint8_t _to);
 void Msg_DevStatus(uint8_t _to, uint8_t _ring);
 void Msg_DevTopology(uint8_t _to, uint8_t _ring);
 
+bool ProcessOutputCfgMsg();
+
 #ifdef EN_SENSOR_ALS
 void Msg_SenALS(uint8_t _value);
 #endif

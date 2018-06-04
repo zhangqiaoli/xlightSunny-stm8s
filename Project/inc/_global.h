@@ -286,6 +286,8 @@ void idleProcess();
 void ChangeDeviceBR(uint32_t _br, uint8_t _ring);
 void ResetNodeToRegister();
 
+bool SendMyMessage();
+
 #define SECOND_UNIT  1
 #define MINUTE_UNIT  2
 #define HOUR_UNIT    3

@@ -62,6 +62,7 @@ bool SendCfgBlock(uint8_t offset,uint8_t size,uint8_t isNeedUniqueid) {
     moSetPayloadType(P_CUSTOM);
     bMsgReady = 1;
     SendMyMessage();
+    return TRUE;
 }
 // Assemble message
 void build(uint8_t _destination, uint8_t _sensor, uint8_t _command, uint8_t _type, bool _enableAck, bool _isAck)

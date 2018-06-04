@@ -9,6 +9,7 @@
 #include "color_factory.h"
 #include "Uart2Dev.h"
 #include "FlashDataStorage.h"
+#include "wwdg.h"
 
 #ifdef EN_SENSOR_ALS || EN_SENSOR_MIC
 #include "ADC1Dev.h"
@@ -83,12 +84,6 @@ void testio()
 
 // RF channel for the sensor net, 0-127
 #define RF24_CHANNEL	   		100
-
-// Window Watchdog
-// Uncomment this line if in debug mode
-#define DEBUG_NO_WWDG
-#define WWDG_COUNTER                    0x7f
-#define WWDG_WINDOW                     0x77
 
 #define NO_RESTART_MODE
 
@@ -167,7 +162,6 @@ uint16_t mTimerKeepAlive = 0;
 uint8_t m_cntRFSendFailed = 0;
 
 int32_t offdelaytick = -1;
-uint8_t feedingDog = 0;
 
 #ifdef EN_SENSOR_ALS
    uint16_t als_tick = 0;
@@ -194,33 +188,6 @@ uint32_t delay_timer[DELAY_TIMERS];
 OnTick_t delay_handler[DELAY_TIMERS];
 uint8_t delay_tag[DELAY_TIMERS];
 
-// Initialize Window Watchdog
-void wwdg_init() {
-#ifndef DEBUG_NO_WWDG  
-  WWDG_Init(WWDG_COUNTER, WWDG_WINDOW);
-#endif  
-}
-
-// Feed the Window Watchdog
-void feed_wwdg(void) {
-#ifndef DEBUG_NO_WWDG  
-  if(feedingDog == 1)
-  {
-    //printlog("isfeeding");
-    return;
-  }
-  else
-  {
-    feedingDog = 1;
-    uint8_t cntValue = WWDG_GetCounter() & WWDG_COUNTER;
-    if( cntValue < WWDG_WINDOW ) {
-      WWDG_SetCounter(WWDG_COUNTER);
-    }
-    feedingDog = 0;
-  }
-#endif  
-  gMainloopTimeTick = 0;
-}
 
 uint8_t *Read_UniqueID(uint8_t *UniqueID, uint16_t Length)  
 {
@@ -928,6 +895,7 @@ int main( void ) {
         break;
       }
       feed_wwdg();
+      gMainloopTimeTick = 0;
     }
 
     // Try to communicate with sibling MCUs (STM8S003F), 
@@ -984,6 +952,7 @@ int main( void ) {
       
       // Feed the Watchdog
       feed_wwdg();
+      gMainloopTimeTick = 0;
       
       // Read sensors
 #ifdef EN_SENSOR_PIR

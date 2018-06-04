@@ -1672,6 +1672,9 @@
     <group>
       <name>common</name>
       <file>
+        <name>$PROJ_DIR$\..\xlightCommon-stm8s\Xlight_lib\debugDefine.h</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\xlightCommon-stm8s\Xlight_lib\delay.c</name>
       </file>
       <file>
@@ -1709,6 +1712,12 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\xlightCommon-stm8s\Xlight_lib\Uart2Dev.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\xlightCommon-stm8s\Xlight_lib\wwdg.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\xlightCommon-stm8s\Xlight_lib\wwdg.h</name>
       </file>
     </group>
     <group>
