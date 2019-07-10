@@ -10,7 +10,7 @@
 /* Exported types ------------------------------------------------------------*/
 // Simple Direct Test
 // Uncomment this line to work in Simple Direct Test Mode
-//#define ENABLE_SDTM
+#define ENABLE_SDTM
 
 // Include Sensors
 /// Comment off line to disable sensor
@@ -49,31 +49,6 @@
 #define UART_CMD_CCT                    1
 #define UART_CMD_RGBW                   2
 #define UART_CMD_HELLO_ACK              16
-
-// Node type
-#define NODE_TYP_GW               'g'
-#define NODE_TYP_LAMP             'l'
-#define NODE_TYP_REMOTE           'r'
-#define NODE_TYP_SYSTEM           's'
-#define NODE_TYP_THIRDPARTY       't'
-
-// NodeID Convention
-#define NODEID_GATEWAY          0
-#define NODEID_MAINDEVICE       1
-#define NODEID_MIN_DEVCIE       8
-#define NODEID_MAX_DEVCIE       63
-#define NODEID_MIN_REMOTE       64
-#define NODEID_MAX_REMOTE       127
-#define NODEID_PROJECTOR        128
-#define NODEID_KEYSIMULATOR     129
-#define NODEID_SUPERSENSOR      130
-#define NODEID_SMARTPHONE       139
-#define NODEID_MIN_GROUP        192
-#define NODEID_MAX_GROUP        223
-#define NODEID_RF_SCANNER       250
-#define NODEID_DUMMY            255
-#define BASESERVICE_ADDRESS     0xFE
-#define BROADCAST_ADDRESS       0xFF
 
 #define BR_MIN_VALUE            1
 #define CT_MIN_VALUE            2700
@@ -324,7 +299,7 @@ bool SendMyMessage();
 #define IS_VALID_REMOTE(DevType)    ((DevType) >= remotetypRFSimply && (DevType) <= remotetypRFEnhanced)
 
 #define IS_GROUP_NODEID(nID)       (nID >= NODEID_MIN_GROUP && nID <= NODEID_MAX_GROUP)
-#define IS_NOT_DEVICE_NODEID(nID)  ((nID < NODEID_MIN_DEVCIE || nID > NODEID_MAX_DEVCIE) && nID != NODEID_MAINDEVICE)
+#define IS_NOT_DEVICE_NODEID(nID)  ((nID < NODEID_MIN_LAMP || nID > NODEID_MAX_LAMP) && nID != NODEID_MAINDEVICE)
 #define IS_NOT_REMOTE_NODEID(nID)  (nID < NODEID_MIN_REMOTE || nID > NODEID_MAX_REMOTE)
 #define IS_MINE_SUBID(nSID)        ((nSID) == 0 || ((nSID) & gConfig.subID))
 

@@ -11,7 +11,7 @@
 #include "FlashDataStorage.h"
 #include "wwdg.h"
 
-#ifdef EN_SENSOR_ALS || EN_SENSOR_MIC
+#if (defined EN_SENSOR_ALS) || (defined EN_SENSOR_MIC)  
 #include "ADC1Dev.h"
 #endif
 
