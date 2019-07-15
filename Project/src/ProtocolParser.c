@@ -78,7 +78,11 @@ void build(uint8_t _destination, uint8_t _sensor, uint8_t _command, uint8_t _typ
 }
 
 uint8_t ParseProtocol(){
+#ifdef ENABLE_SDTM
+  if( rcvMsg.header.destination != gConfig.nodeID && rcvMsg.header.sender != NODEID_MIN_REMOTE ) return 0;
+#else 
   if( rcvMsg.header.destination != gConfig.nodeID && rcvMsg.header.destination != BROADCAST_ADDRESS ) return 0;
+#endif
   
   uint8_t _cmd = miGetCommand();
   uint8_t _sender = rcvMsg.header.sender;  // The original sender
